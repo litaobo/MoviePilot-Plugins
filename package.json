@@ -22,7 +22,7 @@
       "v1.9": "支持馒头新架构自动签到"
     }
   },
-   "AutoBet": {
+   "mteambet": {
        "name": "MTeamAutoBet",
        "description": "M-Team PT 站菠菜板块自动下注插件",
        "labels": "M-Team,菠菜,自动下注",
