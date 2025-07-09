@@ -1,8 +1,9 @@
-from app.log import logger
 from typing import Optional, Dict, Any, List
 from app.plugins import _PluginBase
 from app.core.config import settings
 from app.scheduler import Scheduler
+from app.log import logger
+
 try:
     from app.utils import post_message
     from app.schemas import NotificationType
