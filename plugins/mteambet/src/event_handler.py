@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from .api import MTeamAPI
 from .bet_logic import BetLogic
+from app.log import logger
+
 try:
     from app.utils import post_message
     from app.schemas import NotificationType
