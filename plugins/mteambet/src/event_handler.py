@@ -1,7 +1,13 @@
 from datetime import datetime, timedelta
 from .api import MTeamAPI
 from .bet_logic import BetLogic
-from app.utils import send_notification
+try:
+    from app.utils import post_message
+    from app.schemas import NotificationType
+except ImportError:
+    logger.warning("app.utils.post_message 或 app.schemas.NotificationType 不可用，通知功能将受限")
+    post_message = None
+    NotificationType = None
 from app.log import logger
 
 class EventHandler:
