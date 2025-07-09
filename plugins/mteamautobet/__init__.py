@@ -23,8 +23,8 @@ class MTeamAutoBet(_PluginBase):
     plugin_desc = "自动下注 M-Team PT 站菠菜板块，优化积分收益"
     plugin_icon = "mteam_bet.png"
     plugin_version = "1.0.0"
-    plugin_author = "YourName"
-    author_url = "https://github.com/YourName"
+    plugin_author = "litaobo"
+    author_url = "https://github.com/litaobo"
     plugin_config_prefix = "mteambet_"
     plugin_order = 27
     auth_level = 2
