@@ -16,7 +16,7 @@ from .src.event_handler import EventHandler
 from .src.models import Match, BetRecord
 from app.log import logger
 
-class MTeamAutoBet(_PluginBase):
+class MTeamBet(_PluginBase):
     """M-Team PT 站菠菜板块自动下注插件"""
     # 插件元数据
     plugin_name = "MTeamAutoBet"
