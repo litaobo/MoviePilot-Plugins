@@ -22,6 +22,19 @@
       "v1.9": "支持馒头新架构自动签到"
     }
   },
+   "AutoBet": {
+       "name": "MTeamAutoBet",
+       "description": "M-Team PT 站菠菜板块自动下注插件",
+       "labels": "M-Team,菠菜,自动下注",
+       "version": "1.0.0",
+       "icon": "mteam_bet.png",
+       "author": "litaobo",
+       "level": 2,
+       "v2": true,
+    "history": {
+      "v1.0.0": "馒头菠菜自动下注插件"
+    }
+  },
   "AutoSubv2": {
     "name": "AI字幕自动生成(v2)",
     "description": "使用whisper自动生成视频文件字幕,使用大模型翻译字幕成中文。",
