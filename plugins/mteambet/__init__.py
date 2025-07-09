@@ -1,3 +1,4 @@
+from app.log import logger
 from typing import Optional, Dict, Any, List
 from app.plugins import _PluginBase
 from app.core.config import settings
