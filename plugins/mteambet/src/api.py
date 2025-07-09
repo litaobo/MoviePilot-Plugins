@@ -1,6 +1,7 @@
 import httpx
 from typing import List, Dict, Optional
 from .models import Match, BetRecord, UserProfile
+from app.log import logger
 
 class MTeamAPI:
     def __init__(self, api_key: str, use_proxy: bool = False):
