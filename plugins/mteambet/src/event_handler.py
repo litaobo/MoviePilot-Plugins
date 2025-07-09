@@ -23,7 +23,8 @@ class EventHandler:
         try:
             matches = await self.api.get_matches()
             for match in matches:
-                send_notification(
+             if post_message and NotificationType:
+                post_message(
                     mtype="SiteMessage",
                     title="【M-Team 自动下注】新比赛",
                     text=f"━━━━━━━━━━━━━━\n"
@@ -49,7 +50,8 @@ class EventHandler:
             return matches
         except Exception as e:
             logger.error(f"刷新比赛列表失败: {e}")
-            send_notification(
+         if post_message and NotificationType:
+            post_message(
                 mtype="SiteMessage",
                 title="【M-Team 自动下注】错误",
                 text=f"━━━━━━━━━━━━━━\n"
@@ -64,7 +66,8 @@ class EventHandler:
         try:
             profile = await self.api.get_user_profile(self.uid)
             if not profile or profile.bonus < self.bet_logic.bet_amount:
-                send_notification(
+             if post_message and NotificationType:
+                post_message(
                     mtype="SiteMessage",
                     title="【M-Team 自动下注】余额不足",
                     text=f"━━━━━━━━━━━━━━\n"
@@ -81,7 +84,8 @@ class EventHandler:
             option = selection["option"]
             amount = selection["amount"]
             if not self.bet_logic.check_bet_validity(match.id, option.id):
-                send_notification(
+             if post_message and NotificationType:
+                post_message(
                     mtype="SiteMessage",
                     title="【M-Team 自动下注】重复下注",
                     text=f"━━━━━━━━━━━━━━\n"
@@ -92,7 +96,8 @@ class EventHandler:
             
             result = await self.api.place_bet(option.id, amount)
             if result.get("code") == "0":
-                send_notification(
+             if post_message and NotificationType:
+                post_message(
                     mtype="SiteMessage",
                     title="【M-Team 自动下注】下注成功",
                     text=f"━━━━━━━━━━━━━━\n"
@@ -102,7 +107,8 @@ class EventHandler:
                 )
                 self.bet_logic.update_bet_records(match.id, option.id, amount, True)
             else:
-                send_notification(
+             if post_message and NotificationType:
+                post_message(
                     mtype="SiteMessage",
                     title="【M-Team 自动下注】下注失败",
                     text=f"━━━━━━━━━━━━━━\n"
@@ -112,7 +118,8 @@ class EventHandler:
                 self.bet_logic.update_bet_records(match.id, option.id, amount, False)
         except Exception as e:
             logger.error(f"自动下注失败: {e}")
-            send_notification(
+         if post_message and NotificationType:
+            post_message(
                 mtype="SiteMessage",
                 title="【M-Team 自动下注】错误",
                 text=f"━━━━━━━━━━━━━━\n"
