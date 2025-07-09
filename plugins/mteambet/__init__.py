@@ -2,13 +2,13 @@ from typing import Optional, Dict, Any, List
 from app.plugins import _PluginBase
 from app.core.config import settings
 from app.scheduler import Scheduler
-from app.schemas import NotificationType
 try:
-    from app.events import EventType, eventmanager
+    from app.utils import post_message
+    from app.schemas import NotificationType
 except ImportError:
-    print("警告: app.events 模块不可用，事件处理功能将受限")
-    EventType = None
-    eventmanager = None
+    logger.warning("app.utils.post_message 或 app.schemas.NotificationType 不可用，通知功能将受限")
+    post_message = None
+    NotificationType = None
 
 from .src.api import MTeamAPI
 from .src.bet_logic import BetLogic
