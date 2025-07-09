@@ -1,6 +1,7 @@
 from typing import List, Dict, Optional
 from .models import Match, MatchOption
 from datetime import datetime, timedelta
+from app.log import logger
 import json
 
 class BetLogic:
