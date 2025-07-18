@@ -1,7 +1,5 @@
 # MTeam 自动下注插件
-import re
 import requests
-import time
 from datetime import datetime, timedelta
 from typing import Any, List, Dict, Tuple, Optional
 
