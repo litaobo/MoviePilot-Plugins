@@ -167,31 +167,7 @@ class ManToumt(_PluginBase):
         "bet_amount": 1000
     }
    #  构建插件的查询结果页面，目前未实现内容。
-    def get_page(self) -> List[dict]:
-    return [
-        {
-            "component": "VCard",
-            "props": {"variant": "flat", "class": "mb-4"},
-            "content": [
-                {
-                    "component": "VCardTitle",
-                    "props": {"class": "text-h6"},
-                    "text": "M-Team 当前状态"
-                },
-                {
-                    "component": "VCardText",
-                    "content": [
-                        {
-                            "component": "div",
-                            "props": {"class": "text-body-1"},
-                            "text": "暂无比赛数据。请先启用插件并配置 API Key。"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-        # 插件关闭清理任务
+
     def stop_service(self) -> None:
     """
     插件停止时清理所有任务
