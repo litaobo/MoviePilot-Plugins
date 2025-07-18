@@ -2,7 +2,7 @@
 
 import requests
 from datetime import datetime, timedelta
-from typing import Any, List, Dict, Optional
+from typing import Any, List, Dict, Optional,Tuple
 
 from app.plugins import _PluginBase
 from app.log import logger
@@ -124,43 +124,80 @@ class ManToumt(_PluginBase):
     def get_service(self) -> List[Dict[str, Any]]:
         return []
      # 拼装插件的配置页面表单结构。
-    def get_form(self):
+    def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
+        # 动态判断MoviePilot版本，决定定时任务输入框组件类型
+        version = getattr(settings, "VERSION_FLAG", "v1")
+        cron_field_component = "VCronField" if version == "v2" else "VTextField"
         return [
-            {
-                "component": "VForm",
-                "content": [
-                    {
-                        "component": "VCard",
-                        "props": {"variant": "flat", "class": "mb-4"},
-                        "content": [
-                            {"component": "VCardTitle", "text": "基本设置"},
-                            {"component": "VSwitch", "props": {"model": "enabled", "label": "启用插件"}},
-                            {"component": "VSwitch", "props": {"model": "use_proxy", "label": "使用代理"}},
-                            {"component": "VSwitch", "props": {"model": "notify", "label": "开启通知"}},
-                            {"component": "VSwitch", "props": {"model": "onlyonce", "label": "立即运行一次"}},
-                        ]
-                    },
-                    {
-                        "component": "VCard",
-                        "props": {"variant": "flat", "class": "mb-4"},
-                        "content": [
-                            {"component": "VCardTitle", "text": "功能设置"},
-                            {"component": "VTextField", "props": {"model": "api_key", "label": "API Key"}},
-                            {"component": "VTextField", "props": {"model": "bet_seconds_before", "label": "提前下注秒数", "type": "number"}},
-                            {"component": "VTextField", "props": {"model": "bet_amount", "label": "下注积分", "type": "number"}},
-                        ]
-                    }
-                ]
-            }
-        ], {
-            "enabled": False,
-            "use_proxy": True,
-            "notify": True,
-            "onlyonce": False,
-            "api_key": "",
-            "bet_seconds_before": 10,
-            "bet_amount": 1000
+        {
+            "component": "VForm",
+            "content": [
+                # 基本设置
+                {
+                    "component": "VCard",
+                    "props": {"variant": "flat", "class": "mb-4"},
+                    "content": [
+                        {"component": "VCardTitle", "text": "基本设置"},
+                        {"component": "VSwitch", "props": {"model": "enabled", "label": "启用插件"}},
+                        {"component": "VSwitch", "props": {"model": "use_proxy", "label": "使用代理"}},
+                        {"component": "VSwitch", "props": {"model": "notify", "label": "开启通知"}},
+                        {"component": "VSwitch", "props": {"model": "onlyonce", "label": "立即运行一次"}},
+                    ]
+                },
+                # 功能设置
+                {
+                    "component": "VCard",
+                    "props": {"variant": "flat", "class": "mb-4"},
+                    "content": [
+                        {"component": "VCardTitle", "text": "功能设置"},
+                        {"component": "VTextField", "props": {"model": "api_key", "label": "API Key"}},
+                        {"component": "VTextField", "props": {"model": "bet_seconds_before", "label": "提前下注秒数", "type": "number"}},
+                        {"component": "VTextField", "props": {"model": "bet_amount", "label": "下注积分", "type": "number"}},
+                    ]
+                }
+            ]
         }
+    ], {
+        "enabled": False,
+        "use_proxy": True,
+        "notify": True,
+        "onlyonce": False,
+        "api_key": "",
+        "bet_seconds_before": 10,
+        "bet_amount": 1000
+    }
    #  构建插件的查询结果页面，目前未实现内容。
     def get_page(self) -> List[dict]:
-        return []
+    return [
+        {
+            "component": "VCard",
+            "props": {"variant": "flat", "class": "mb-4"},
+            "content": [
+                {
+                    "component": "VCardTitle",
+                    "props": {"class": "text-h6"},
+                    "text": "M-Team 当前状态"
+                },
+                {
+                    "component": "VCardText",
+                    "content": [
+                        {
+                            "component": "div",
+                            "props": {"class": "text-body-1"},
+                            "text": "暂无比赛数据。请先启用插件并配置 API Key。"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+        # 插件关闭清理任务
+    def stop_service(self) -> None:
+    """
+    插件停止时清理所有任务
+    """
+    try:
+        Scheduler().remove_plugin_jobs(self.__class__.__name__)
+        logger.info("M-Team 自动下注助手任务已停止")
+    except Exception as e:
+        logger.error("退出插件失败：%s" % str(e))
