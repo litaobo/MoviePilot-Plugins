@@ -2,7 +2,7 @@
 
 import requests
 from datetime import datetime, timedelta
-from typing import Any, List, Dict, Optional,Tuple
+from typing import Any, List, Dict, Optional
 
 from app.plugins import _PluginBase
 from app.log import logger
