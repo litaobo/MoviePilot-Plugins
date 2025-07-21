@@ -87,10 +87,10 @@ class BetGameNotify(_PluginBase):
         推送比赛通知
         """
         if self._notify:
-            message = f"新比赛通知：\n\n{title}\n结束时间：{endtime}\n赔率选项：\n{options}"
+            message = f"\n\n{title}\n\n赔率\n{options}\n{endtime}"
             self.post_message(
                 mtype=NotificationType.SiteMessage,
-                title="【新比赛通知】",
+                title="【M-Team菠菜推送】",
                 text=message
             )
 
@@ -108,7 +108,7 @@ class BetGameNotify(_PluginBase):
             return [
                 {
                     "id": "BetGameNotify",
-                    "name": "比赛通知服务",
+                    "name": "M-Team菠菜比赛推送",
                     "trigger": CronTrigger.from_crontab(self._cron),
                     "func": self.__fetch_and_notify,
                     "kwargs": {}
@@ -116,98 +116,104 @@ class BetGameNotify(_PluginBase):
             ]
         return []
 
-    def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
-        """
-        配置插件页面
-        """
-        return [
-            {
-                'component': 'VForm',
-                'content': [
-                    {
-                        'component': 'VRow',
-                        'content': [
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 4
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VSwitch',
-                                        'props': {
-                                            'model': 'enabled',
-                                            'label': '启用插件',
-                                        }
-                                    }
-                                ]
+def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
+    """
+    配置插件页面   需要返回两块数据：1、页面配置；2、数据结构
+    """
+    return [
+        {
+            'component': 'VForm',
+            'content': [
+                # 第一行：开关控制
+                {
+                    'component': 'VRow',
+                    'content': [
+                        # 开启插件
+                        {
+                            'component': 'VCol',
+                            'props': {
+                                'cols': 12,
+                                'md': 6
                             },
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 4
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VSwitch',
-                                        'props': {
-                                            'model': 'notify',
-                                            'label': '发送通知',
-                                        }
+                            'content': [
+                                {
+                                    'component': 'VSwitch',
+                                    'props': {
+                                        'model': 'enabled',
+                                        'label': '开启插件',
                                     }
-                                ]
+                                }
+                            ]
+                        },
+                        # 开启通知
+                        {
+                            'component': 'VCol',
+                            'props': {
+                                'cols': 12,
+                                'md': 6
                             },
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 4
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VTextField',
-                                        'props': {
-                                            'model': 'api_key',
-                                            'label': 'API Key',
-                                            'placeholder': '请输入 M-Team API Key',
-                                        }
+                            'content': [
+                                {
+                                    'component': 'VSwitch',
+                                    'props': {
+                                        'model': 'notify',
+                                        'label': '开启通知',
                                     }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        'component': 'VRow',
-                        'content': [
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 6
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VCronField',
-                                        'props': {
-                                            'model': 'cron',
-                                            'label': '检查周期',
-                                            'placeholder': '5位cron表达式'
-                                        }
-                                    }
-                                ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                # 第二行：输入字段
+                {
+                    'component': 'VRow',
+                    'content': [
+                        # API Key
+                        {
+                            'component': 'VCol',
+                            'props': {
+                                'cols': 12,
+                                'md': 6
                             },
-                        ]
-                    }
-                ]
-            }
-        ], {
-            "enabled": False,
-            "notify": False,
-            "cron": "0 9 * * *",
-            "api_key": "",  # 默认空API Key
+                            'content': [
+                                {
+                                    'component': 'VTextField',
+                                    'props': {
+                                        'model': 'api_key',
+                                        'label': 'API Key',
+                                        'placeholder': '请输入 M-Team API Key',
+                                    }
+                                }
+                            ]
+                        },
+                        # Cron 表达式
+                        {
+                            'component': 'VCol',
+                            'props': {
+                                'cols': 12,
+                                'md': 6
+                            },
+                            'content': [
+                                {
+                                    'component': 'VCronField',
+                                    'props': {
+                                        'model': 'cron',
+                                        'label': '检查周期',
+                                        'placeholder': '5位cron表达式'
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
+    ], {
+        "enabled": False,
+        "notify": False,
+        "cron": "0 9 * * *",
+        "api_key": "",  # 默认空API Key
+    }
 
     def get_page(self) -> List[dict]:
         pass
