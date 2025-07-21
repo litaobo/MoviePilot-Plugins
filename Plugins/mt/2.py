@@ -168,7 +168,7 @@ class BetGameNotify(_PluginBase):
                                         'props': {
                                             'model': 'api_key',
                                             'label': 'API Key',
-                                            'placeholder': '请输入API Key',
+                                            'placeholder': '请输入 M-Team API Key',
                                         }
                                     }
                                 ]
