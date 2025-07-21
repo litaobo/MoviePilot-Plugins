@@ -17,7 +17,7 @@ from app.utils.http import RequestUtils
 class MteamNotify(_PluginBase):
     plugin_name = "mteam比赛通知"
     plugin_desc = "获取新比赛并推送通知"
-    plugin_icon = "https://github.com/litaobo/MoviePilot-Plugins/blob/main/icons/mteam_bet.png"
+    plugin_icon = "https://raw.githubusercontent.com/litaobo/MoviePilot-Plugins/main/icons/mteam_bet.png"
     plugin_version = "1.0"
     plugin_author = "litaobo"
     author_url = "https://github.com/litaobo"
