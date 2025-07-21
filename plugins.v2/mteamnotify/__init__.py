@@ -87,10 +87,10 @@ class MteamNotify(_PluginBase):
         推送比赛通知
         """
         if self._notify:
-            message = f"{title}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{options}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{endtime}"
+            message = f"\n{title}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{options}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{endtime}"
             self.post_message(
                 mtype=NotificationType.SiteMessage,
-                title="M-Team ##菠菜##",##通知大标题
+                title="M-Team 菠菜",##通知大标题
                 text=message
             )
 
