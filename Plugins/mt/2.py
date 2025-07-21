@@ -97,6 +97,9 @@ class BetGameNotify(_PluginBase):
     def get_state(self) -> bool:
         return self._enabled
 
+    def get_api(self) -> List[Dict[str, Any]]:
+        pass
+
     def get_service(self) -> List[Dict[str, Any]]:
         """
         注册插件公共服务
