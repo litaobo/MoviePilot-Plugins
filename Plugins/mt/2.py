@@ -206,6 +206,10 @@ class BetGameNotify(_PluginBase):
             "api_key": "",  # 默认空API Key
         }
 
+    def get_page(self) -> List[dict]:
+        pass
+
+
     def stop_service(self):
         """
         退出插件
