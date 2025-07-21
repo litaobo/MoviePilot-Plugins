@@ -90,7 +90,7 @@ class BetGameNotify(_PluginBase):
             message = f"\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{title}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{options}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{endtime}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n"
             self.post_message(
                 mtype=NotificationType.SiteMessage,
-                title="",##通知大标题
+                title="菠菜",##通知大标题
                 text=message
             )
 
