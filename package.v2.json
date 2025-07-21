@@ -4,7 +4,7 @@
     "description": "获取新比赛并推送通知",
     "labels": "mteam,比赛",
     "version": "1.0",
-    "icon": "https://github.com/litaobo/MoviePilot-Plugins/blob/main/icons/mteam_bet.png",
+    "icon": "icons/mteam_bet.png",
     "author": "litaobo",
     "level": 2,
     "history": {
