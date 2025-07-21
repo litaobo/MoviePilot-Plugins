@@ -1,6 +1,7 @@
 import datetime
 import re
 from typing import Any, List, Dict, Tuple, Optional
+
 import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -25,6 +26,7 @@ class BetGameNotify(_PluginBase):
     auth_level = 1
 
     _enabled = False
+    
     _cron = None
     _notify = False
     _api_key = ""  # 存储API Key
