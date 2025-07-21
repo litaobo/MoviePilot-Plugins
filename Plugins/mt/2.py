@@ -87,7 +87,7 @@ class BetGameNotify(_PluginBase):
         推送比赛通知
         """
         if self._notify:
-            message = f"\n\n{title}\n\n赔率\n{options}\n{endtime}"
+            message = f"\n\n{title}\n\n赔率\n{options}\n\n{endtime}"
             self.post_message(
                 mtype=NotificationType.SiteMessage,
                 title="【M-Team菠菜推送】",
@@ -140,7 +140,7 @@ def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
                                     'component': 'VSwitch',
                                     'props': {
                                         'model': 'enabled',
-                                        'label': '开启插件',
+                                        'label': '启用插件',
                                     }
                                 }
                             ]
@@ -157,7 +157,7 @@ def get_form(self) -> Tuple[List[dict], Dict[str, Any]]:
                                     'component': 'VSwitch',
                                     'props': {
                                         'model': 'notify',
-                                        'label': '开启通知',
+                                        'label': '推送比赛',
                                     }
                                 }
                             ]
