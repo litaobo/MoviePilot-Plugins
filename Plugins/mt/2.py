@@ -87,10 +87,10 @@ class BetGameNotify(_PluginBase):
         推送比赛通知
         """
         if self._notify:
-            message = f"\n\n{title}\n\n{options}\n\n{endtime}"
+            message = f"\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{title}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{options}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n{endtime}\n┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄\n"
             self.post_message(
                 mtype=NotificationType.SiteMessage,
-                title="【MT新比赛】",
+                title="",##通知大标题
                 text=message
             )
 
